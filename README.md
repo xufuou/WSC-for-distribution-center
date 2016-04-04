@@ -1,10 +1,14 @@
 # WSC-for-distribution-center
 A python application to determine the best location for a distribution center using Weighting the Selection Criteria.
 
-#Overview
+# Description of files
 
-* Input: CSV file with information of possible sites
-* Output: CSV file with the best location
+* Input: CSV file with information of possible sites(coords)
+* Output: CSV file with the best location(FactSelec)
+* tabulate.py - a python script to display arrays into tables
+* projeto.py - the core script of the application
+* pymaps.py - the Google Maps script for map visualization
+* mymap.html - the html file to output the map
 
 #Main features
 
