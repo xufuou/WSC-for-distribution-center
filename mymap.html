@@ -1,0 +1,103 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=AIzaSyCj-UAqhnY-fhkeCEayjALakrGJMgcaQ6A" type="text/javascript"></script>
+        <script type="text/javascript">
+        //<![CDATA[
+        function load() {
+            if (GBrowserIsCompatible()) {
+                
+            
+            function Point(lat,long,html,icon) {
+                  this.gpoint = new GMarker(new GLatLng(lat,long),icon);
+                  this.html = html;
+                  
+               }               
+               
+               
+               function Map(id,points,lat,long,zoom) {
+                  this.id = id;
+                  this.points = points;
+                  this.gmap = new GMap2(document.getElementById(this.id));
+                  this.gmap.setCenter(new GLatLng(lat, long), zoom);
+                  this.markerlist = markerlist;
+                  this.addmarker = addmarker;
+                  this.array2points = array2points;
+                   
+                  function markerlist(array) {
+                     for (var i in array) {
+                        this.addmarker(array[i]);
+                     }
+                  }
+                  
+                  function array2points(map_points) {            
+                      for (var i in map_points) {  
+                        points[i] = new Point(map_points[i][0],map_points[i][1],map_points[i][2],map_points[i][3]);         }
+                      return points;   
+                    }                  
+                  
+                  function addmarker(point) {
+                     if (point.html) {
+                       GEvent.addListener(point.gpoint, "click", function() { // change click to mouseover or other mouse action
+                           point.gpoint.openInfoWindowHtml(point.html);
+                        
+                       });
+                       
+                     }
+                     this.gmap.addOverlay(point.gpoint);  
+                  }
+                  this.points = array2points(this.points);
+                  this.markerlist(this.points);
+            }  
+                     
+                var icon = new GIcon(); 
+                icon.image = "";
+                icon.shadow = "";
+                icon.iconSize = new GSize(12, 20);
+                icon.shadowSize = new GSize(22, 20);
+                icon.iconAnchor = new GPoint(6, 20);
+                icon.infoWindowAnchor = new GPoint(5, 1);
+         
+                var blue_icon = new GIcon(); 
+                blue_icon.image = "http://www.clker.com/cliparts/B/B/1/E/y/r/marker-pin-google-md.png";
+                blue_icon.shadow = "";
+                blue_icon.iconSize = new GSize(15, 25);
+                blue_icon.shadowSize = new GSize(22, 20);
+                blue_icon.iconAnchor = new GPoint(6, 20);
+                blue_icon.infoWindowAnchor = new GPoint(5, 1);
+         
+                var red_icon = new GIcon(); 
+                red_icon.image = "http://www.clker.com/cliparts/e/3/F/I/0/A/google-maps-marker-for-residencelamontagne-md.png";
+                red_icon.shadow = "";
+                red_icon.iconSize = new GSize(15, 25);
+                red_icon.shadowSize = new GSize(22, 20);
+                red_icon.iconAnchor = new GPoint(6, 20);
+                red_icon.infoWindowAnchor = new GPoint(5, 1);
+        
+                    map_points = [['Latitude', 'Longitude', 'y', red_icon], ['41.1253', '16.8667', 'Bari', red_icon], ['50.6372', '3.0633', 'Lille', red_icon], ['48.1333', '11.5667', 'Munich', blue_icon], ['39.4667', '-0.3833', 'Valence', red_icon], ['51.655', '-0.3957', 'Watford', red_icon]];
+             var map = new Map('map',map_points,46.0,7.0,5);
+        
+
+           map.gmap.addControl(new GMapTypeControl());
+
+           map.gmap.addControl(new GSmallMapControl());
+
+
+            }
+        }
+        //]]>
+        </script>
+        
+        
+        
+  </head>
+
+  <body onload="load()" onunload="GUnload()">
+    <div id="map" style="width: 1000px; height: 600px"></div>
+  </body>
+</html>
